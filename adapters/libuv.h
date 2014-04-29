@@ -11,8 +11,6 @@ typedef struct redisLibuvEvents {
   int                events;
 } redisLibuvEvents;
 
-int redisLibuvAttach(redisAsyncContext*, uv_loop_t*);
-
 static void redisLibuvPoll(uv_poll_t* handle, int status, int events) {
   redisLibuvEvents* p = (redisLibuvEvents*)handle->data;
 
@@ -87,7 +85,7 @@ static void redisLibuvCleanup(void *privdata) {
 }
 
 
-static int redisLibuvAttach(redisAsyncContext* ac, uv_loop_t* loop) {
+int redisLibuvAttach(redisAsyncContext* ac, uv_loop_t* loop) {
   redisContext *c = &(ac->c);
 
   if (ac->ev.data != NULL) {
